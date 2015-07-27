@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_title_staff">Section 1</string>
+    <string name="fragment_title_product">Section 2</string>
+    <string name="fragment_title_setting">Section 3</string>
+</resources>
