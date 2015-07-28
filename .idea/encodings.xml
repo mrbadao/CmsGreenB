@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/XListViewActivity.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListView.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListViewFooter.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListViewHeader.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_footer.xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_header.xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/xListView.xml" charset="windows-1252" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
