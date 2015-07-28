@@ -1,60 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="GreenBee" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/GreenBeeActionBar</item>
-        <item name="android:actionBarTabStyle">@style/GreenBeeBarTabStyle</item>
-        <item name="android:actionMenuTextColor">@color/actionbar_text_color</item>
-
-        <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/GreenBeeActionBar</item>
-        <item name="actionBarTabStyle">@style/GreenBeeBarTabStyle</item>
-        <item name="actionMenuTextColor">@color/actionbar_text_color</item>
-    </style>
-
-    <!-- ActionBar styles -->
-    <style name="GreenBeeActionBar"
-        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/actionbar_backgound_color</item>
-        <item name="android:titleTextStyle">@style/GreenBeeActionBarTitleText</item>
-        <item name="android:backgroundStacked">@color/actionbar_text_color</item>
-        <item name="android:backgroundSplit">@color/actionbar_text_color</item>
-        <item name="android:icon">@mipmap/ic_launcher</item>
-
-        <!-- Support library compatibility -->
-        <item name="background">@color/actionbar_backgound_color</item>
-        <item name="titleTextStyle">@style/GreenBeeActionBarTitleText</item>
-        <item name="backgroundSplit">@color/actionbar_text_color</item>
-        <item name="backgroundStacked">@color/actionbar_text_color</item>
-        <item name="logo">@mipmap/ic_launcher</item>
-    </style>
-
-    <!-- ActionBar title text -->
-    <style name="GreenBeeActionBarTitleText"
-        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/actionbar_text_color</item>
-
-        <!-- The textColor property is backward compatible with the Support Library -->
-    </style>
-
-    <!-- GreenBee Bar Tab Style-->
-    <style name="GreenBeeBarTabStyle"
-        parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:background">@color/actionbar_backgound_color</item>
-        <item name="android:actionBarTabTextStyle">@style/GreenBeeActionBarTitleText</item>
-
-        <!-- Support library compatibility -->
-        <item name="background">@color/actionbar_backgound_color</item>
-        <item name="titleTextStyle">@style/GreenBeeActionBarTitleText</item>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
     </style>
 
 
-    <!-- ActionBar tabs text -->
-    <style name="GreenBeeActionBarTabText"
-        parent="@style/Widget.AppCompat.ActionBar.TabText">
-        <item name="android:textColor">@color/actionbar_text_color</item>
-        <!-- The textColor property is backward compatible with the Support Library -->
-    </style>
 
 
 </resources>

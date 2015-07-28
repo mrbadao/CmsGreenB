@@ -3,5 +3,5 @@
     <!-- Actionbar colors-->
     <color name="actionbar_text_color">#fff</color>
     <color name="actionbar_backgound_color">#025c1e</color>
-    <color name="actionTabs_backgound_color">#025c1e</color>
+    <color name="actionTabs_backgound_color">#fff</color>
 </resources>
