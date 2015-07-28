@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.greenb.cms.R;
+import com.greenb.cms.fragment.FruitMaterialsListvViewFragment;
 import com.greenb.cms.fragment.StaffListViewFragment;
 
 /**
@@ -24,11 +25,11 @@ public class MainTabPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment sectionFragment = null;
         switch (position) {
-            case 1:
+            case 0:
                 sectionFragment = new StaffListViewFragment();
                 break;
-            default:
-//                sectionFragment = new OrderDetailInfoFragment();
+            case 1:
+                sectionFragment = new FruitMaterialsListvViewFragment();
                 break;
         }
 
