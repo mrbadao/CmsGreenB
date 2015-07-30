@@ -1,22 +1,20 @@
 package com.greenb.cms.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.greenb.cms.R;
 import com.greenb.cms.adapter.MainTabPagerAdapter;
+import com.greenb.cms.httpinterface.LoginInterface;
+import com.greenb.cms.httptask.HttpLoginRequest;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -74,6 +72,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             .setIcon(MainTabPagerAdapter.mTabs[i])
                             .setTabListener(this));
         }
+//        String[] user = {"admin@localhost.com","123456"};
+//        new HttpLoginRequest(MainActivity.this, this).execute(user);
     }
 
 
