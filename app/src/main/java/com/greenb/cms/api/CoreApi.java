@@ -86,14 +86,14 @@ public class CoreApi {
             e.printStackTrace();
         }
 
-        JSONObject jsonObject = null;
         try {
-            jsonObject = new JSONObject(builder.toString());
+            JSONObject jsonObject = new JSONObject(builder.toString());
+            return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return jsonObject;
+        return null;
     }
 
 
@@ -102,7 +102,8 @@ public class CoreApi {
         try {
             jsonData.put("email", email);
             jsonData.put("password", password);
-            return getJSON("auth/authenticate", jsonData, "Admin-Login");
+            JSONObject authInfo = getJSON("auth/authenticate", jsonData, "Admin-Login");
+            return authInfo;
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -27,6 +27,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.greenb.cms.R;
+import com.greenb.cms.httpinterface.LoginInterface;
+import com.greenb.cms.httptask.HttpLoginRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, LoginInterface {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -46,7 +48,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private HttpLoginRequest mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -144,21 +146,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
             showProgress(true);
 
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new HttpLoginRequest(LoginActivity.this, this, email, password);
             mAuthTask.execute((Void) null);
+//            mAuthTask = new UserLoginTask(email, password);
+
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-//        return email.contains("@");
-        return true;
+        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-//        return password.length() > 4;
-        return true;
+        return password.length() > 4;
     }
 
     /**
@@ -229,6 +231,24 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
+    }
+
+    @Override
+    public void onUserLoginSuccess() {
+        mAuthTask = null;
+//        showProgress(false);
+        finish();
+        Intent mIntent;
+        mIntent = new Intent(LoginActivity.this, MainActivity.class);
+        LoginActivity.this.startActivity(mIntent);
+    }
+
+    @Override
+    public void onUserLoginFaild(String mMessage) {
+        mAuthTask = null;
+        showProgress(false);
+        mPasswordView.setError(mMessage);
+        mPasswordView.requestFocus();
     }
 
     private interface ProfileQuery {

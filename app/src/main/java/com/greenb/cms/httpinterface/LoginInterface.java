@@ -7,6 +7,5 @@ import org.json.JSONObject;
  */
 public interface LoginInterface {
     void onUserLoginSuccess();
-
-//    void onCheckToken(JSONObject jsonObject);
+    void onUserLoginFaild(String mMessage);
 }
