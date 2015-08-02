@@ -28,7 +28,7 @@ public class CoreApi {
     private static JSONObject jObj = null;
     private static String json = "";
 
-    static final String API_DOMAIN = "http://192.168.1.16/greenbapi/";
+    static final String API_DOMAIN = "http://192.168.1.52/greenbapi/";
     static final String REQUEST_AGENT = "Android";
 
     private static JSONObject getJSON(String uri, JSONObject postData, String authorization) {
@@ -86,27 +86,28 @@ public class CoreApi {
             e.printStackTrace();
         }
 
+        JSONObject jsonObject = null;
         try {
-            JSONObject jsonObject = new JSONObject(builder.toString());
-            return jsonObject;
+            jsonObject = new JSONObject(builder.toString());
+            Log.i("RES", jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return jsonObject;
     }
 
 
     public static JSONObject Login(String email, String password) {
         JSONObject jsonData = new JSONObject();
+        JSONObject authInfo = null;
         try {
             jsonData.put("email", email);
             jsonData.put("password", password);
-            JSONObject authInfo = getJSON("auth/authenticate", jsonData, "Admin-Login");
-            return authInfo;
+            authInfo = getJSON("auth/authenticate", jsonData, "Admin-Login");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return authInfo;
     }
 }

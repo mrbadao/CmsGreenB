@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.greenb.cms.R;
 import com.greenb.cms.api.CoreApi;
@@ -29,21 +30,19 @@ public class HttpLoginRequest extends AsyncTask<Void, Void, JSONObject> {
     }
 
     @Override
-    protected void onPreExecute() {
-    }
-
-    @Override
     protected JSONObject doInBackground(Void... params) {
         return CoreApi.Login(this.mEmail, this.mPassword);
     }
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
+        Log.i("FIF", jsonObject.toString());
         if (jsonObject != null) {
             if (!jsonObject.isNull("success") && jsonObject.optBoolean("success")) {
                 String uId = null;
                 String token = null;
                 try {
+                    jsonObject = jsonObject.getJSONObject("data");
                     uId = jsonObject.getString("uid");
                     token = jsonObject.getString("token");
                 } catch (JSONException e) {
@@ -78,8 +77,6 @@ public class HttpLoginRequest extends AsyncTask<Void, Void, JSONObject> {
                 }
 
             }
-        }
-
-        delegate.onUserLoginFaild("Faild to connect server.");
+        }else delegate.onUserLoginFaild("Faild to connect server.");
     }
 }

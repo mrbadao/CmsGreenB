@@ -117,7 +117,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -148,7 +148,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
 
             mAuthTask = new HttpLoginRequest(LoginActivity.this, this, email, password);
             mAuthTask.execute((Void) null);
-//            mAuthTask = new UserLoginTask(email, password);
 
         }
     }
@@ -236,7 +235,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
     @Override
     public void onUserLoginSuccess() {
         mAuthTask = null;
-//        showProgress(false);
+        showProgress(false);
         finish();
         Intent mIntent;
         mIntent = new Intent(LoginActivity.this, MainActivity.class);
