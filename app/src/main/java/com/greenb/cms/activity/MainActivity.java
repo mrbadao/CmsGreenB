@@ -1,5 +1,6 @@
 package com.greenb.cms.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.greenb.cms.R;
 import com.greenb.cms.adapter.MainTabPagerAdapter;
@@ -92,11 +94,19 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_new) {
-            return true;
-        }
+        switch (id){
+            case R.id.action_add_new:
+                if(mViewPager.getCurrentItem() == 0)
+                {
+                    Intent mIntent;
+                    mIntent = new Intent(MainActivity.this, AddCashierActivity.class);
+                    MainActivity.this.startActivity(mIntent);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
