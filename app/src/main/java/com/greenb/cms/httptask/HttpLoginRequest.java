@@ -36,47 +36,33 @@ public class HttpLoginRequest extends AsyncTask<Void, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
-        Log.i("FIF", jsonObject.toString());
-        if (jsonObject != null) {
-            if (!jsonObject.isNull("success") && jsonObject.optBoolean("success")) {
-                String uId = null;
-                String token = null;
-                try {
+        if (jsonObject != null && !jsonObject.isNull("success")) {
+            try {
+                if (jsonObject.optBoolean("success")) {
                     jsonObject = jsonObject.getJSONObject("data");
-                    uId = jsonObject.getString("uid");
-                    token = jsonObject.getString("token");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (uId != null && token != null) {
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("com.greenb.cms.user.uid", uId);
-                    editor.putString("com.greenb.cms.user.token", token);
-                    editor.commit();
-                    delegate.onUserLoginSuccess();
-                }
-            }
+                    String uId = jsonObject.getString("uid");
+                    String token = jsonObject.getString("token");
 
-            if (!jsonObject.isNull("success") && !jsonObject.optBoolean("success")) {
-                if (!jsonObject.isNull("error")) {
-                    try {
-                        String msgError = jsonObject.getJSONObject("error").getString("message");
-                        delegate.onUserLoginFaild(msgError);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (uId != null && token != null) {
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("com.greenb.cms.user.uid", uId);
+                        editor.putString("com.greenb.cms.user.token", token);
+                        editor.commit();
+                        delegate.onUserLoginSuccess();
+                        return;
                     }
-
-                }
-
-                if (!jsonObject.isNull("data")) {
-                    if (jsonObject.has("AuthError")) {
-                        String msgError = context.getString(R.string.error_incorrect_password);
-                        delegate.onUserLoginFaild(msgError);
+                } else {
+                    if (!jsonObject.isNull("error") || !jsonObject.isNull("data")) {
+                        delegate.onUserLoginFaild(this.context.getString(R.string.error_incorrect_password));
+                        return;
                     }
                 }
 
+            } catch (JSONException e) {
+                delegate.onUserLoginFaild(this.context.getString(R.string.error_incorrect_password));
+                return;
             }
-        }else delegate.onUserLoginFaild("Faild to connect server.");
+        } else delegate.onUserLoginFaild("Faild to connect server.");
     }
 }

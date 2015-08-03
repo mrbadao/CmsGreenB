@@ -235,7 +235,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
     @Override
     public void onUserLoginSuccess() {
         mAuthTask = null;
-        showProgress(false);
         finish();
         Intent mIntent;
         mIntent = new Intent(LoginActivity.this, MainActivity.class);

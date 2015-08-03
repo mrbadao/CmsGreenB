@@ -5,11 +5,12 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListView.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListViewFooter.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListViewHeader.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/CashierInterface.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/LoginInterface.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/xlistview_arrow.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlist_cashier_view.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_footer.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_header.xml" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/xListView.xml" charset="windows-1252" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
