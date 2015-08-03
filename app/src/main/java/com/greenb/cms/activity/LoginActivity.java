@@ -8,11 +8,13 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 import com.greenb.cms.R;
 import com.greenb.cms.httpinterface.LoginInterface;
 import com.greenb.cms.httptask.HttpLoginRequest;
+import com.greenb.cms.httptask.HttpTokenValidateRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +41,7 @@ import java.util.List;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, LoginInterface {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -60,6 +57,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+        showProgress(true);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -84,9 +84,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>, 
                 attemptLogin();
             }
         });
+        checkToken();
+    }
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+    private void checkToken() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String uId = sharedPref.getString("com.greenb.cms.user.uid", "");
+        String token = sharedPref.getString("com.greenb.cms.user.token", "");
+        new HttpTokenValidateRequest(LoginActivity.this, this, uId, token).execute((Void) null);
     }
 
     private void populateAutoComplete() {

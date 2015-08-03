@@ -111,6 +111,20 @@ public class CoreApi {
         return null;
     }
 
+    public static JSONObject TokenValidate(String uid, String token) {
+        JSONObject jsonData = new JSONObject();
+        try {
+            jsonData.put("uid", uid);
+            jsonData.put("token", token);
+            jsonData.put("role", "Administrators");
+            JSONObject authInfo = getJSON("auth/validatetoken", jsonData, "Admin-Login");
+            return authInfo;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static JSONObject GetCashier(String page, String authorization) {
         JSONObject jsonData = new JSONObject();
         authorization = "Cashier " + authorization;
