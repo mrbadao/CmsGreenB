@@ -3,10 +3,12 @@ package com.greenb.cms.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by HieuNguyen on 8/3/2015.
  */
-public class Cashier {
+public class Cashier implements Serializable{
     public String id;
     public String display_name;
     public String loginid;

@@ -28,7 +28,7 @@ public class CoreApi {
     private static JSONObject jObj = null;
     private static String json = "";
 
-    static final String API_DOMAIN = "http://192.168.1.16/greenbapi/";
+    static final String API_DOMAIN = "http://192.168.1.52/greenbapi/";
     static final String REQUEST_AGENT = "Android";
 
     private static JSONObject getJSON(String uri, JSONObject postData, String authorization) {

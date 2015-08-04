@@ -3,6 +3,7 @@ package com.greenb.cms.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,15 +15,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.greenb.cms.R;
 import com.greenb.cms.XListView.view.XListView;
+import com.greenb.cms.activity.ViewCashierActivity;
 import com.greenb.cms.adapter.CashierAdapter;
 import com.greenb.cms.httpinterface.GetCashierInterface;
 import com.greenb.cms.httptask.HttpGetCashiersRequest;
 import com.greenb.cms.models.Cashier;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +36,7 @@ import java.util.Date;
 /**
  * Created by HieuNguyen on 7/28/2015.
  */
-public class StaffListViewFragment extends Fragment implements XListView.IXListViewListener, GetCashierInterface, View.OnClickListener {
+public class StaffListViewFragment extends Fragment implements XListView.IXListViewListener, GetCashierInterface, View.OnClickListener, ListView.OnItemClickListener {
     View rootView;
     private XListView xListViewCashiers;
     private String mUid, mToken;
@@ -119,6 +124,7 @@ public class StaffListViewFragment extends Fragment implements XListView.IXListV
                 this.mCashiersAdapter = new CashierAdapter(getActivity(), R.layout.xlist_cashier_view, this.mCashierArrList);
                 this.xListViewCashiers.setAdapter(this.mCashiersAdapter);
                 this.xListViewCashiers.setXListViewListener(this);
+                this.xListViewCashiers.setOnItemClickListener(this);
             } else {
                 this.mCashiersAdapter.notifyDataSetChanged();
                 this.onLoad();
@@ -176,5 +182,13 @@ public class StaffListViewFragment extends Fragment implements XListView.IXListV
                 this.getCashiers(this.mPage + 1);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Cashier cashier = (Cashier) parent.getItemAtPosition(position);
+        Intent intent = new Intent(getActivity(), ViewCashierActivity.class);
+        intent.putExtra("Cashier", (Serializable) cashier);
+        getActivity().startActivity(intent);
     }
 }

@@ -54,7 +54,7 @@ public class CashierAdapter extends ArrayAdapter {
         Cashier item = (Cashier) getItem(position);
         TextView txtOrderName = (TextView) view.findViewById(R.id.item_cashier_textview);
 
-        txtOrderName.setText(item.loginid);
+        txtOrderName.setText(item.display_name);
         return view;
     }
 }

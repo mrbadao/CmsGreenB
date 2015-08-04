@@ -40,16 +40,27 @@
             android:label="@string/title_activity_main"
             android:logo="@drawable/home_as_up_indicator"
             android:screenOrientation="portrait" >
-
-            <!-- <intent-filter android:label="@string/app_name" > -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activity.AddGetCashierActivity"
             android:label="@string/title_activity_add_cashier"
-            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:parentActivityName=".activity.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.greenb.cms.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ViewCashierActivity"
+            android:label="@string/title_activity_view_cashier"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.greenb.cms.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.EditCashierActivity"
+            android:label="@string/title_activity_edit_cashier"
             android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -6,6 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_add_new">Add new</string>
     <string name="action_save">Save</string>
+    <string name="action_Edit">Edit</string>
     <string name="title_activity_add_cashier_activity2">AddCashierActivity2Activity</string>
     <string name="title_activity_add_cashier">Add New Cashier</string>
+    <string name="title_activity_view_cashier">View Cashier Detail</string>
+    <string name="title_activity_edit_cashier">Edit Cashier</string>
 </resources>
