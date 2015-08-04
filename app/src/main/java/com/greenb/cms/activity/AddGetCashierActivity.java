@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,16 +13,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.greenb.cms.R;
-import com.greenb.cms.httpinterface.CashierInterface;
+import com.greenb.cms.httpinterface.AddCashierInterface;
 import com.greenb.cms.httptask.HttpAddCashierRequest;
 import com.greenb.cms.models.Cashier;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
-public class AddCashierActivity extends ActionBarActivity implements CashierInterface {
+public class AddGetCashierActivity extends ActionBarActivity implements AddCashierInterface {
     private EditText mLoginid;
     private EditText mPassword;
     private EditText mRePassword;
@@ -32,19 +32,28 @@ public class AddCashierActivity extends ActionBarActivity implements CashierInte
     private EditText mEmail;
     private CheckBox mStatus;
     private EditText mAddress;
+    private HashMap<String, EditText> mHashMapAttributes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_cashier);
+        mHashMapAttributes = new HashMap<String, EditText>();
+
         //set properties view
         mLoginid = (EditText) findViewById(R.id.editTxt_loginid);
+        mHashMapAttributes.put("loginid", mLoginid);
         mPassword = (EditText) findViewById(R.id.editTxt_pwd);
+        mHashMapAttributes.put("password", mPassword);
         mRePassword = (EditText) findViewById(R.id.editTxt_pwd_conf);
         mDisplayName = (EditText) findViewById(R.id.editTxt_display_name);
+        mHashMapAttributes.put("display_name", mDisplayName);
         mPhone = (EditText) findViewById(R.id.editTxt_phone);
+        mHashMapAttributes.put("phone", mPhone);
         mEmail = (EditText) findViewById(R.id.editTxt_email);
+        mHashMapAttributes.put("email", mEmail);
         mAddress = (EditText) findViewById(R.id.editTxt_address);
+        mHashMapAttributes.put("address", mAddress);
         mStatus = (CheckBox) findViewById(R.id.checkBox_status);
     }
 
@@ -78,7 +87,7 @@ public class AddCashierActivity extends ActionBarActivity implements CashierInte
         if ((focusView = validateAttributes()) != null) {
             focusView.requestFocus();
         } else {
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(AddCashierActivity.this);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(AddGetCashierActivity.this);
             String uid = sharedPref.getString("com.greenb.cms.user.uid", "");
             String token = sharedPref.getString("com.greenb.cms.user.token", "");
             JSONObject jsonCashier = new JSONObject();
@@ -91,13 +100,15 @@ public class AddCashierActivity extends ActionBarActivity implements CashierInte
                 String status = mStatus.isChecked() ? "1" : "0";
                 jsonCashier.put("status", status);
 
-                if(!TextUtils.isEmpty(mAddress.getText().toString())) jsonCashier.put("address", mAddress.getText().toString());
-                if(!TextUtils.isEmpty(mEmail.getText().toString())) jsonCashier.put("email", mEmail.getText().toString());
-                Log.i("Cashier", jsonCashier.toString());
-                new HttpAddCashierRequest(AddCashierActivity.this, uid + " " + token, this).execute(jsonCashier);
+                if (!TextUtils.isEmpty(mAddress.getText().toString()))
+                    jsonCashier.put("address", mAddress.getText().toString());
+                if (!TextUtils.isEmpty(mEmail.getText().toString()))
+                    jsonCashier.put("email", mEmail.getText().toString());
+
+                new HttpAddCashierRequest(AddGetCashierActivity.this, uid + " " + token, this).execute(jsonCashier);
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(AddCashierActivity.this, "Can not add new Cashier.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddGetCashierActivity.this, "Can not add new Cashier.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -152,12 +163,26 @@ public class AddCashierActivity extends ActionBarActivity implements CashierInte
     }
 
     @Override
-    public void onCashiersReceive(ArrayList<Cashier> cashiers, int pages) {
+    public void onCashierAddSuccessly(Cashier cashier) {
+        Toast.makeText(AddGetCashierActivity.this, "You have just been added '" + cashier.display_name + "' as a new Cashier.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCashierValidateFaild(HashMap<String, String> hashMapValidateError) {
+        Iterator myVeryOwnIterator = hashMapValidateError.keySet().iterator();
+
+        while (myVeryOwnIterator.hasNext()) {
+            String key = (String) myVeryOwnIterator.next();
+            if (mHashMapAttributes.containsKey(key)) {
+                EditText attr = (EditText) mHashMapAttributes.get(key);
+                attr.setError((String) hashMapValidateError.get(key));
+            }
+        }
 
     }
 
     @Override
-    public void onCashierGetFaild() {
-
+    public void onCashierConnectFaild() {
+        Toast.makeText(AddGetCashierActivity.this, "Faild to connect server.", Toast.LENGTH_SHORT).show();
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by mrbadao on 03/05/2015.
  */
-public interface CashierInterface {
+public interface GetCashierInterface {
     void onCashiersReceive(ArrayList<Cashier> cashiers, int pages);
     void onCashierGetFaild();
 }

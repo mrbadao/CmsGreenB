@@ -47,7 +47,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".activity.AddCashierActivity"
+            android:name=".activity.AddGetCashierActivity"
             android:label="@string/title_activity_add_cashier"
             android:windowSoftInputMode="adjustResize|stateVisible"
             android:parentActivityName=".activity.MainActivity" >

@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 import com.greenb.cms.api.CoreApi;
-import com.greenb.cms.httpinterface.CashierInterface;
+import com.greenb.cms.httpinterface.GetCashierInterface;
 import com.greenb.cms.models.Cashier;
 
 import org.json.JSONArray;
@@ -18,11 +18,11 @@ import java.util.ArrayList;
  * Created by HieuNguyen on 7/30/2015.
  */
 public class HttpGetCashiersRequest extends AsyncTask<String, Void, JSONObject> {
-    public CashierInterface delegate;
+    public GetCashierInterface delegate;
     private Context context;
     private final String mAuthorization;
 
-    public HttpGetCashiersRequest(Context context, String authorization, CashierInterface delegate) {
+    public HttpGetCashiersRequest(Context context, String authorization, GetCashierInterface delegate) {
         this.context = context;
         this.delegate = delegate;
         mAuthorization = authorization;

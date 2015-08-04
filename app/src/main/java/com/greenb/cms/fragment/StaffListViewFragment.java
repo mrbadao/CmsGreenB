@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import com.greenb.cms.R;
 import com.greenb.cms.XListView.view.XListView;
 import com.greenb.cms.adapter.CashierAdapter;
-import com.greenb.cms.httpinterface.CashierInterface;
+import com.greenb.cms.httpinterface.GetCashierInterface;
 import com.greenb.cms.httptask.HttpGetCashiersRequest;
 import com.greenb.cms.models.Cashier;
 
@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * Created by HieuNguyen on 7/28/2015.
  */
-public class StaffListViewFragment extends Fragment implements XListView.IXListViewListener, CashierInterface, View.OnClickListener {
+public class StaffListViewFragment extends Fragment implements XListView.IXListViewListener, GetCashierInterface, View.OnClickListener {
     View rootView;
     private XListView xListViewCashiers;
     private String mUid, mToken;

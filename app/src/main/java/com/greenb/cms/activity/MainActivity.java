@@ -9,12 +9,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.greenb.cms.R;
 import com.greenb.cms.adapter.MainTabPagerAdapter;
-import com.greenb.cms.httpinterface.LoginInterface;
-import com.greenb.cms.httptask.HttpLoginRequest;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener{
 
@@ -99,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 if(mViewPager.getCurrentItem() == 0)
                 {
                     Intent mIntent;
-                    mIntent = new Intent(MainActivity.this, AddCashierActivity.class);
+                    mIntent = new Intent(MainActivity.this, AddGetCashierActivity.class);
                     MainActivity.this.startActivity(mIntent);
                 }
                 return true;
