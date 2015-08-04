@@ -17,12 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by HieuNguyen on 7/30/2015.
  */
-public class HttpGetCashierRequest extends AsyncTask<String, Void, JSONObject> {
+public class HttpGetCashiersRequest extends AsyncTask<String, Void, JSONObject> {
     public CashierInterface delegate;
     private Context context;
     private final String mAuthorization;
 
-    public HttpGetCashierRequest(Context context, String authorization, CashierInterface delegate) {
+    public HttpGetCashiersRequest(Context context, String authorization, CashierInterface delegate) {
         this.context = context;
         this.delegate = delegate;
         mAuthorization = authorization;

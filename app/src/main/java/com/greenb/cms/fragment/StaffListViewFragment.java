@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.greenb.cms.R;
 import com.greenb.cms.XListView.view.XListView;
 import com.greenb.cms.adapter.CashierAdapter;
 import com.greenb.cms.httpinterface.CashierInterface;
-import com.greenb.cms.httptask.HttpGetCashierRequest;
+import com.greenb.cms.httptask.HttpGetCashiersRequest;
 import com.greenb.cms.models.Cashier;
 
 import java.text.DateFormat;
@@ -72,7 +70,7 @@ public class StaffListViewFragment extends Fragment implements XListView.IXListV
     }
 
     private void getCashiers(int page) {
-        HttpGetCashierRequest getCashierRequest = new HttpGetCashierRequest(getActivity(), this.mUid + " " + this.mToken, this);
+        HttpGetCashiersRequest getCashierRequest = new HttpGetCashiersRequest(getActivity(), this.mUid + " " + this.mToken, this);
         getCashierRequest.execute(String.valueOf(page));
     }
 

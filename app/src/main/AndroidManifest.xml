@@ -49,6 +49,7 @@
         <activity
             android:name=".activity.AddCashierActivity"
             android:label="@string/title_activity_add_cashier"
+            android:windowSoftInputMode="adjustResize|stateVisible"
             android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

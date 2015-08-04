@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.greenb.cms.activity.AddCashierActivity">
     <item android:id="@+id/action_save"
-        android:icon="@drawable/add_new_indicator"
+        android:icon="@drawable/ic_action_accept"
         android:title="@string/action_save"
         android:orderInCategory="100"
         app:showAsAction="always" />

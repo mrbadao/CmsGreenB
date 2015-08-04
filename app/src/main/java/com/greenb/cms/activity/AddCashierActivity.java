@@ -1,21 +1,36 @@
 package com.greenb.cms.activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.greenb.cms.R;
+import com.greenb.cms.httpinterface.CashierInterface;
+import com.greenb.cms.httptask.HttpAddCashierRequest;
+import com.greenb.cms.models.Cashier;
 
-public class AddCashierActivity extends ActionBarActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class AddCashierActivity extends ActionBarActivity implements CashierInterface {
     private EditText mLoginid;
     private EditText mPassword;
     private EditText mRePassword;
     private EditText mDisplayName;
     private EditText mPhone;
     private EditText mEmail;
-    private EditText mStatus;
+    private CheckBox mStatus;
     private EditText mAddress;
 
     @Override
@@ -30,7 +45,7 @@ public class AddCashierActivity extends ActionBarActivity {
         mPhone = (EditText) findViewById(R.id.editTxt_phone);
         mEmail = (EditText) findViewById(R.id.editTxt_email);
         mAddress = (EditText) findViewById(R.id.editTxt_address);
-        mStatus = (EditText) findViewById(R.id.checkBox_status);
+        mStatus = (CheckBox) findViewById(R.id.checkBox_status);
     }
 
     @Override
@@ -48,7 +63,7 @@ public class AddCashierActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        switch (id){
+        switch (id) {
             case R.id.action_save:
                 atempSaveCashier();
                 return true;
@@ -57,7 +72,92 @@ public class AddCashierActivity extends ActionBarActivity {
         }
     }
 
-    private void atempSaveCashier(){
+    // Save Cashier to DB
+    private void atempSaveCashier() {
+        View focusView;
+        if ((focusView = validateAttributes()) != null) {
+            focusView.requestFocus();
+        } else {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(AddCashierActivity.this);
+            String uid = sharedPref.getString("com.greenb.cms.user.uid", "");
+            String token = sharedPref.getString("com.greenb.cms.user.token", "");
+            JSONObject jsonCashier = new JSONObject();
+            try {
+                jsonCashier.put("loginid", mLoginid.getText().toString());
+                jsonCashier.put("password", mPassword.getText().toString());
+                jsonCashier.put("display_name", mDisplayName.getText().toString());
+                jsonCashier.put("phone", mPhone.getText().toString());
+
+                String status = mStatus.isChecked() ? "1" : "0";
+                jsonCashier.put("status", status);
+
+                if(!TextUtils.isEmpty(mAddress.getText().toString())) jsonCashier.put("address", mAddress.getText().toString());
+                if(!TextUtils.isEmpty(mEmail.getText().toString())) jsonCashier.put("email", mEmail.getText().toString());
+                Log.i("Cashier", jsonCashier.toString());
+                new HttpAddCashierRequest(AddCashierActivity.this, uid + " " + token, this).execute(jsonCashier);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(AddCashierActivity.this, "Can not add new Cashier.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // validate model Attributes
+    private View validateAttributes() {
+        View focusView = null;
+
+        String email = mEmail.getText().toString();
+        mEmail.setError(null);
+        if (!TextUtils.isEmpty(email) && !email.contains("@")) {
+            mEmail.setError("Let input a validate email.");
+            focusView = mEmail;
+        }
+
+        String phone = mPhone.getText().toString();
+        mPhone.setError(null);
+        if (TextUtils.isEmpty(phone)) {
+            mPhone.setError("Let input a validate phone number.");
+            focusView = mPhone;
+        }
+
+        String displayname = mDisplayName.getText().toString();
+        mDisplayName.setError(null);
+        if (TextUtils.isEmpty(displayname)) {
+            mDisplayName.setError("Let input a validate name.");
+            focusView = mDisplayName;
+        }
+
+        String password = mPassword.getText().toString();
+        mPassword.setError(null);
+        if (TextUtils.isEmpty(password) || password.length() <= 5 || password.length() > 32) {
+            mPassword.setError("Password too short (min length 6 characters, max length 32 characters).");
+            focusView = mPassword;
+        }
+
+        String rePassword = mRePassword.getText().toString();
+        mRePassword.setError(null);
+        if (!rePassword.equals(password)) {
+            mRePassword.setError("Two password not match.");
+            focusView = mRePassword;
+        }
+
+        String loginid = mLoginid.getText().toString();
+        mLoginid.setError(null);
+        if (TextUtils.isEmpty(loginid) || loginid.length() <= 5 || loginid.length() > 20) {
+            mLoginid.setError("Login id too short (min length 6 characters, max length 20 characters).");
+            focusView = mLoginid;
+        }
+
+        return focusView;
+    }
+
+    @Override
+    public void onCashiersReceive(ArrayList<Cashier> cashiers, int pages) {
+
+    }
+
+    @Override
+    public void onCashierGetFaild() {
 
     }
 }
