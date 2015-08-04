@@ -129,7 +129,7 @@ public class CoreApi {
         JSONObject jsonData = new JSONObject();
         authorization = "Cashier " + authorization;
         try {
-            jsonData.put("pagesize", "2");
+            jsonData.put("pagesize", "10");
             jsonData.put("page", page);
             JSONObject cashiers = getJSON("cashier/getcashiers", jsonData, authorization);
             return cashiers;

@@ -164,7 +164,8 @@ public class AddGetCashierActivity extends ActionBarActivity implements AddCashi
 
     @Override
     public void onCashierAddSuccessly(Cashier cashier) {
-        Toast.makeText(AddGetCashierActivity.this, "You have just been added '" + cashier.display_name + "' as a new Cashier.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddGetCashierActivity.this, "You have just been added '" + cashier.display_name + "' as a new Cashier.", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
