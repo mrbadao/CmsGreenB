@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTxt_loginid"
             android:layout_weight="1"
-            android:lines="1" />
+            android:lines="1"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -48,7 +49,8 @@
             android:layout_height="match_parent"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editTxt_pwd" />
+            android:id="@+id/editTxt_pwd"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -71,7 +73,8 @@
             android:layout_height="match_parent"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editTxt_pwd_conf" />
+            android:id="@+id/editTxt_pwd_conf"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -94,7 +97,8 @@
             android:layout_height="wrap_content"
             android:lines="1"
             android:ems="10"
-            android:id="@+id/editTxt_display_name" />
+            android:id="@+id/editTxt_display_name"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +120,8 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
-            android:id="@+id/editTxt_phone" />
+            android:id="@+id/editTxt_phone"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -139,7 +144,8 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editTxt_email"/>
+            android:id="@+id/editTxt_email"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -161,7 +167,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTxt_address"
             android:lines="1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout

@@ -28,7 +28,7 @@ public class CoreApi {
     private static JSONObject jObj = null;
     private static String json = "";
 
-    static final String API_DOMAIN = "http://192.168.1.52/greenbapi/";
+    static final String API_DOMAIN = "http://api.greenbee.cf/";
     static final String REQUEST_AGENT = "Android";
 
     private static JSONObject getJSON(String uri, JSONObject postData, String authorization) {
@@ -52,7 +52,7 @@ public class CoreApi {
             }
 
             sendData.put("Request-Agent", REQUEST_AGENT);
-            StringEntity se = new StringEntity(sendData.toString());
+            StringEntity se = new StringEntity(sendData.toString(),"UTF-8");
             Log.i("JSONSENDPARAM", sendData.toString());
             httpPost.setEntity(se);
 
@@ -145,6 +145,19 @@ public class CoreApi {
         try {
             jsonData.put("cashier",jsonCashier);
             JSONObject cashier = getJSON("cashier/createcashier", jsonData, authorization);
+            return cashier;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject EditCashier(JSONObject jsonCashier, String authorization) {
+        JSONObject jsonData = new JSONObject();
+        authorization = "Cashier " + authorization;
+        try {
+            jsonData.put("cashier",jsonCashier);
+            JSONObject cashier = getJSON("cashier/edit", jsonData, authorization);
             return cashier;
         } catch (JSONException e) {
             e.printStackTrace();

@@ -43,16 +43,22 @@ public class AddGetCashierActivity extends ActionBarActivity implements AddCashi
         //set properties view
         mLoginid = (EditText) findViewById(R.id.editTxt_loginid);
         mHashMapAttributes.put("loginid", mLoginid);
+
         mPassword = (EditText) findViewById(R.id.editTxt_pwd);
         mHashMapAttributes.put("password", mPassword);
         mRePassword = (EditText) findViewById(R.id.editTxt_pwd_conf);
+
         mDisplayName = (EditText) findViewById(R.id.editTxt_display_name);
         mHashMapAttributes.put("display_name", mDisplayName);
+
         mPhone = (EditText) findViewById(R.id.editTxt_phone);
         mHashMapAttributes.put("phone", mPhone);
+
         mEmail = (EditText) findViewById(R.id.editTxt_email);
+
         mHashMapAttributes.put("email", mEmail);
         mAddress = (EditText) findViewById(R.id.editTxt_address);
+
         mHashMapAttributes.put("address", mAddress);
         mStatus = (CheckBox) findViewById(R.id.checkBox_status);
     }
