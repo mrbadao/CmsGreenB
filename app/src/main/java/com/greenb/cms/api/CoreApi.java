@@ -28,7 +28,7 @@ public class CoreApi {
     private static JSONObject jObj = null;
     private static String json = "";
 
-    static final String API_DOMAIN = "http://api.greenbee.cf/";
+    static final String API_DOMAIN = "http://192.168.1.16/greenbapi/";
     static final String REQUEST_AGENT = "Android";
 
     private static JSONObject getJSON(String uri, JSONObject postData, String authorization) {
@@ -159,6 +159,20 @@ public class CoreApi {
             jsonData.put("cashier",jsonCashier);
             JSONObject cashier = getJSON("cashier/edit", jsonData, authorization);
             return cashier;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject GetFruit(String page, String authorization) {
+        JSONObject jsonData = new JSONObject();
+        authorization = "Cashier " + authorization;
+        try {
+            jsonData.put("pagesize", "10");
+            jsonData.put("page", page);
+            JSONObject fruits = getJSON("fruit/getall", jsonData, authorization);
+            return fruits;
         } catch (JSONException e) {
             e.printStackTrace();
         }

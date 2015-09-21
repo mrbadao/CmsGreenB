@@ -7,9 +7,11 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/XListView/view/XListViewHeader.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/AddCashierInterface.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/GetCashierInterface.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/GetFruitInterface.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/greenb/cms/httpinterface/LoginInterface.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/xlistview_arrow.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlist_cashier_view.xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlist_fruit_view.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_footer.xml" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/xlistview_header.xml" charset="windows-1252" />
     <file url="PROJECT" charset="UTF-8" />
